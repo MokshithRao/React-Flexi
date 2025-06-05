@@ -1,41 +1,100 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import BlogPostList from './components/BlogPostList';
+import BlogPostDetail from './components/BlogPostDetail';
 
 const samplePosts = [
   {
     id: '1',
     title: 'Getting Started with React',
     summary: 'Learn the basics of React and build your first application.',
+    content: `<p>React is a powerful JavaScript library for building user interfaces. In this post, we'll explore the fundamentals of React and walk through creating your first application.</p>
+              <h2>Why React?</h2>
+              <p>React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.</p>
+              <h2>Key Concepts</h2>
+              <ul>
+                <li>Components</li>
+                <li>Props</li>
+                <li>State</li>
+                <li>Lifecycle Methods</li>
+              </ul>`,
+    author: 'Jane Smith',
     date: '2023-01-01',
-    url: '/posts/1',
   },
   {
     id: '2',
     title: 'CSS Grid vs. Flexbox',
     summary: 'A comparison of two powerful layout systems in CSS.',
+    content: `<p>CSS Grid and Flexbox are two of the most powerful tools in modern web development for creating responsive layouts. Let's explore when to use each one.</p>
+              <h2>Flexbox</h2>
+              <p>Flexbox is designed for one-dimensional layouts - either a row or a column. It's perfect for:</p>
+              <ul>
+                <li>Navigation menus</li>
+                <li>Card layouts</li>
+                <li>Centering content</li>
+              </ul>
+              <h2>CSS Grid</h2>
+              <p>CSS Grid is designed for two-dimensional layouts - rows and columns together. It's ideal for:</p>
+              <ul>
+                <li>Page layouts</li>
+                <li>Complex grid systems</li>
+                <li>Card layouts with varying sizes</li>
+              </ul>`,
+    author: 'John Doe',
     date: '2023-02-15',
-    url: '/posts/2',
   },
   {
     id: '3',
     title: 'Accessibility in Web Development',
     summary: 'Tips for making your web applications more accessible.',
+    content: `<p>Web accessibility is crucial for ensuring that your applications can be used by everyone, regardless of their abilities.</p>
+              <h2>Key Principles</h2>
+              <ul>
+                <li>Semantic HTML</li>
+                <li>ARIA attributes</li>
+                <li>Keyboard navigation</li>
+                <li>Color contrast</li>
+              </ul>
+              <p>Remember: accessibility is not a feature, it's a requirement.</p>`,
+    author: 'Sarah Johnson',
     date: '2023-03-10',
-    url: '/posts/3',
   },
 ];
 
 function App() {
   return (
-    <>
-      <h1>Blog Posts</h1>
-      <BlogPostList posts={samplePosts} />
+    <div className="app-container">
       <Routes>
-        <Route path="/posts/:id" element={<p>Post Content Placeholder</p>} />
+        <Route 
+          path="/" 
+          element={
+            <>
+              <h1>Blog Posts</h1>
+              <BlogPostList posts={samplePosts} />
+            </>
+          } 
+        />
+        <Route 
+          path="/posts/:id" 
+          element={
+            <BlogPostRenderer posts={samplePosts} />
+          } 
+        />
       </Routes>
-    </>
+    </div>
   );
+}
+
+// Helper component to render blog posts
+function BlogPostRenderer({ posts }) {
+  const { id } = useParams();
+  const post = posts.find(p => p.id === id);
+  
+  if (!post) {
+    return <BlogPostDetail />;
+  }
+  
+  return <BlogPostDetail {...post} />;
 }
 
 export default App;

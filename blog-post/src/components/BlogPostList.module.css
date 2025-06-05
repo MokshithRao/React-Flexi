@@ -1,24 +1,60 @@
 .blogPostList {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.grid {
   display: grid;
-  gap: 20px;
-  padding: 20px;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-@media (min-width: 769px) {
-  .blogPostList {
-    grid-template-columns: 1fr 1fr;
-  }
+.postLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s ease;
 }
 
-@media (min-width: 1200px) {
-  .blogPostList {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+.postLink:hover,
+.postLink:focus {
+  transform: translateY(-4px);
 }
 
-.empty {
+.emptyState {
   text-align: center;
-  color: #999999;
-  padding: 20px;
+  padding: 40px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.emptyState p {
+  color: #666;
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Tablet View */
+@media screen and (max-width: 1199px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Mobile View */
+@media screen and (max-width: 768px) {
+  .blogPostList {
+    padding: 16px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }

@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+
+.blogPostDetail {
+  font-family: 'Roboto', Arial, sans-serif;
+  background: #fff;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+}
+
+.meta {
+  margin-bottom: 30px;
+}
+
+.author {
+  font-size: 18px;
+  color: #666666;
+  margin: 0 0 10px 0;
+}
+
+.authorName {
+  font-weight: 500;
+}
+
+.date {
+  display: block;
+  font-size: 16px;
+  color: #999999;
+  margin: 0;
+}
+
+.content {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333333;
+}
+
+.content p {
+  margin-bottom: 1.5em;
+}
+
+.content a {
+  color: #007BFF;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.content a:hover,
+.content a:focus {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.notFound {
+  text-align: center;
+  padding: 40px;
+  color: #666666;
+}
+
+.notFound h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #333333;
+}
+
+/* Tablet View */
+@media screen and (max-width: 1199px) {
+  .blogPostDetail {
+    padding: 32px;
+    margin: 0 auto;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .content {
+    font-size: 16px;
+  }
+}
+
+/* Mobile View */
+@media screen and (max-width: 768px) {
+  .blogPostDetail {
+    padding: 20px;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .title {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+
+  .author {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .date {
+    font-size: 12px;
+  }
+
+  .content {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .meta {
+    margin-bottom: 20px;
+  }
+}
+
+/* High contrast mode and dark theme support */
+@media (prefers-color-scheme: dark) {
+  .blogPostDetail {
+    background: #1a1a1a;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .title {
+    color: #ffffff;
+  }
+
+  .author {
+    color: #cccccc;
+  }
+
+  .date {
+    color: #999999;
+  }
+
+  .content {
+    color: #ffffff;
+  }
+
+  .content a {
+    color: #66b3ff;
+  }
+
+  .content a:hover,
+  .content a:focus {
+    color: #99ccff;
+  }
+}
