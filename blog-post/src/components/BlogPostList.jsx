@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import BlogPostItem from './BlogPostItem';
 import styles from './BlogPostList.module.css';
 
-const BlogPostList = ({ posts }) => {
+const BlogPostList = ({ posts, onDelete }) => {
   if (!posts || posts.length === 0) {
     return (
       <div className={styles.emptyState} role="status">
@@ -15,15 +15,29 @@ const BlogPostList = ({ posts }) => {
 
   return (
     <section className={styles.blogPostList}>
-      <div className={styles.grid}>
-        {posts.map((post) => (
-          <Link
-            key={post.id}
-            to={`/posts/${post.id}`}
-            className={styles.postLink}
-          >
-            <BlogPostItem {...post} />
-          </Link>
+      <div className={styles.grid}>      {posts.map((post) => (
+          <div key={post.id} className={styles.postContainer}>
+            <Link
+              to={`/posts/${post.id}`}
+              className={styles.postLink}
+            >
+              <BlogPostItem {...post} />
+            </Link>
+            <div className={styles.postActions}>
+              <Link to={`/posts/${post.id}/edit`} className={styles.editButton}>
+                Edit
+              </Link>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  onDelete(post.id);
+                }}
+                className={styles.deleteButton}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         ))}
       </div>
     </section>

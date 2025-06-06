@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './BlogPostDetail.module.css';
 
-const BlogPostDetail = ({ title, content, author, date }) => {
+const BlogPostDetail = ({ id, title, content, author, date, onDelete }) => {
+  const navigate = useNavigate();
+
   // Error handling for missing data
   if (!title || !content || !author || !date) {
     return (
@@ -35,12 +38,26 @@ const BlogPostDetail = ({ title, content, author, date }) => {
       <div
         className={styles.content}
         dangerouslySetInnerHTML={{ __html: content }}
-      />
+      />      <div className={styles.actions}>
+        <Link to={`/posts/${id}/edit`} className={styles.editButton}>
+          Edit Post
+        </Link>
+        <button 
+          onClick={() => {
+            onDelete(id);
+            navigate('/');
+          }} 
+          className={styles.deleteButton}
+        >
+          Delete Post
+        </button>
+      </div>
     </article>
   );
 };
 
 BlogPostDetail.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
@@ -48,6 +65,7 @@ BlogPostDetail.propTypes = {
     PropTypes.string,
     PropTypes.instanceOf(Date),
   ]).isRequired,
+  onDelete: PropTypes.func,
 };
 
 export default BlogPostDetail;

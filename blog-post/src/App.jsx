@@ -1,9 +1,12 @@
-import React from 'react';
-import { Routes, Route, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Routes, Route, useParams, Link } from 'react-router-dom';
 import BlogPostList from './components/BlogPostList';
 import BlogPostDetail from './components/BlogPostDetail';
+import CreatePost from './pages/CreatePost';
+import EditPost from './pages/EditPost';
+import styles from './App.module.css';
 
-const samplePosts = [
+const initialPosts = [
   {
     id: '1',
     title: 'Getting Started with React',
@@ -62,23 +65,52 @@ const samplePosts = [
 ];
 
 function App() {
+  const [posts, setPosts] = useState(initialPosts);
+
+  const handleCreatePost = (newPost) => {
+    setPosts([...posts, newPost]);
+  };
+
+  const handleUpdatePost = (updatedPost) => {
+    setPosts(posts.map(post => 
+      post.id === updatedPost.id ? updatedPost : post
+    ));
+  };
+
+  const handleDeletePost = (postId) => {
+    if (window.confirm('Are you sure you want to delete this post?')) {
+      setPosts(posts.filter(post => post.id !== postId));
+    }
+  };
+
   return (
-    <div className="app-container">
+    <div className={styles.appContainer}>
+      <nav className={styles.nav}>
+        <Link to="/" className={styles.navLink}>Blog Posts</Link>
+        <Link to="/create" className={styles.navLinkCreate}>Create New Post</Link>
+      </nav>
+
       <Routes>
         <Route 
           path="/" 
           element={
             <>
               <h1>Blog Posts</h1>
-              <BlogPostList posts={samplePosts} />
+              <BlogPostList posts={posts} onDelete={handleDeletePost} />
             </>
           } 
         />
         <Route 
           path="/posts/:id" 
-          element={
-            <BlogPostRenderer posts={samplePosts} />
-          } 
+          element={<BlogPostRenderer posts={posts} onDelete={handleDeletePost} />} 
+        />
+        <Route
+          path="/create"
+          element={<CreatePost onCreatePost={handleCreatePost} />}
+        />
+        <Route
+          path="/posts/:id/edit"
+          element={<EditPost posts={posts} onUpdatePost={handleUpdatePost} />}
         />
       </Routes>
     </div>
@@ -86,7 +118,7 @@ function App() {
 }
 
 // Helper component to render blog posts
-function BlogPostRenderer({ posts }) {
+function BlogPostRenderer({ posts, onDelete }) {
   const { id } = useParams();
   const post = posts.find(p => p.id === id);
   
@@ -94,7 +126,7 @@ function BlogPostRenderer({ posts }) {
     return <BlogPostDetail />;
   }
   
-  return <BlogPostDetail {...post} />;
+  return <BlogPostDetail {...post} onDelete={onDelete} />;
 }
 
 export default App;
