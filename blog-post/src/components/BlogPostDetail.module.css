@@ -6,9 +6,10 @@
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 40px;
+  padding: clamp(20px, 5vw, 40px);
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
   border-radius: 8px;
+  box-sizing: border-box;
 }
 
 .title {
@@ -72,6 +73,66 @@
   font-size: 24px;
   margin-bottom: 16px;
   color: #333333;
+}
+
+/* Actions and Edit Button styles */
+.actions {
+  margin-top: 2rem;
+  text-align: right;
+  border-top: 1px solid #dddddd;
+  padding-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.editButton,
+.deleteButton {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.editButton {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.editButton:hover,
+.editButton:focus {
+  background-color: #0056b3;
+  color: white;
+}
+
+.deleteButton:hover,
+.deleteButton:focus {
+  background-color: #c82333;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .editButton,
+  .deleteButton {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 /* Tablet View */
@@ -152,5 +213,27 @@
   .content a:hover,
   .content a:focus {
     color: #99ccff;
+  }
+
+  .actions {
+    border-top-color: #444444;
+  }
+
+  .editButton {
+    background-color: #66b3ff;
+  }
+
+  .editButton:hover,
+  .editButton:focus {
+    background-color: #99ccff;
+  }
+
+  .deleteButton {
+    background-color: #ff6b6b;
+  }
+
+  .deleteButton:hover,
+  .deleteButton:focus {
+    background-color: #ff8585;
   }
 }

@@ -1,0 +1,171 @@
+/* BlogPostForm.module.css */
+.blogPostForm {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 2rem);
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 1200px) {
+  .formGroup {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .formGroup {
+    display: block;
+    margin-bottom: 1.25rem;
+  }
+
+  .label {
+    text-align: left;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .input,
+  .textarea {
+    font-size: 16px; /* Prevent zoom on mobile */
+    padding: 0.625rem;
+  }
+
+  .errorMessage {
+    grid-column: 1;
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+  }
+
+  .submitButton {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .blogPostForm {
+    padding: 1rem;
+  }
+
+  .input,
+  .textarea {
+    padding: 0.5rem;
+  }
+}
+
+.label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 1200px) {
+  .label {
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 0.5rem;
+  }
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333333;
+  transition: border-color 0.2s ease;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.input.error,
+.textarea.error {
+  border-color: #dc3545;
+}
+
+.errorMessage {
+  grid-column: 2;
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.submitButton {
+  grid-column: 2;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
+.submitButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .blogPostForm {
+    background: #1a1a1a;
+  }
+
+  .label {
+    color: #ffffff;
+  }
+
+  .input,
+  .textarea {
+    background: #2a2a2a;
+    border-color: #444444;
+    color: #ffffff;
+  }
+
+  .input:focus,
+  .textarea:focus {
+    border-color: #66b3ff;
+    box-shadow: 0 0 0 2px rgba(102, 179, 255, 0.25);
+  }
+
+  .submitButton {
+    background-color: #66b3ff;
+  }
+
+  .submitButton:hover {
+    background-color: #99ccff;
+  }
+}

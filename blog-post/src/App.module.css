@@ -1,0 +1,67 @@
+.appContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #dddddd;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.navLink,
+.navLinkCreate {
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.navLink {
+  color: #333333;
+}
+
+.navLinkCreate {
+  background-color: #007bff;
+  color: white;
+}
+
+.navLink:hover {
+  color: #007bff;
+}
+
+.navLinkCreate:hover {
+  background-color: #0056b3;
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .nav {
+    border-bottom-color: #444444;
+  }
+
+  .navLink {
+    color: #ffffff;
+  }
+
+  .navLink:hover {
+    color: #66b3ff;
+  }
+
+  .navLinkCreate {
+    background-color: #66b3ff;
+  }
+
+  .navLinkCreate:hover {
+    background-color: #99ccff;
+  }
+}
