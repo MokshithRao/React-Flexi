@@ -21,9 +21,11 @@ const BlogPostDetail = ({ id, title, content, author, date, onDelete }) => {
     day: 'numeric',
     year: 'numeric',
   });
-
   return (
     <article className={styles.blogPostDetail}>
+      <Link to="/" className={styles.backButton} aria-label="Back to blog posts">
+        ← Back to Posts
+      </Link>
       <header>
         <h1 className={styles.title}>{title}</h1>
         <div className={styles.meta}>

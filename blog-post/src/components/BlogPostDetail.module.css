@@ -1,15 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
 
 .blogPostDetail {
-  font-family: 'Roboto', Arial, sans-serif;
-  background: #fff;
+  background: var(--card-background);
   width: 100%;
   max-width: 800px;
-  margin: 0 auto;
-  padding: clamp(20px, 5vw, 40px);
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
-  border-radius: 8px;
+  margin: 2rem auto;
+  padding: clamp(2rem, 5vw, 4rem);
+  box-shadow: var(--shadow-lg);
+  border-radius: 1.5rem;
   box-sizing: border-box;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.blogPostDetail::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), #8b5cf6);
 }
 
 .title {
@@ -122,17 +134,22 @@
   color: white;
 }
 
-@media (max-width: 768px) {
-  .actions {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: #666666;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
 
-  .editButton,
-  .deleteButton {
-    width: 100%;
-    text-align: center;
-  }
+.backButton:hover {
+  color: #333333;
+  background-color: #f0f0f0;
+  transform: translateX(-4px);
 }
 
 /* Tablet View */
@@ -180,6 +197,11 @@
 
   .meta {
     margin-bottom: 20px;
+  }
+
+  .backButton {
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
   }
 }
 
@@ -235,5 +257,14 @@
   .deleteButton:hover,
   .deleteButton:focus {
     background-color: #ff8585;
+  }
+
+  .backButton {
+    color: #cccccc;
+  }
+
+  .backButton:hover {
+    color: #ffffff;
+    background-color: #2a2a2a;
   }
 }
