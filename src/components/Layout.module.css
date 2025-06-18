@@ -1,0 +1,46 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  height: 60px;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer {
+  background-color: #003366;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 15px;
+}
+
+.socialLinks a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+
+.socialLinks a:hover {
+  text-decoration: underline;
+}
