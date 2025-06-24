@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useParams, Link } from 'react-router-dom';
 import BlogPostList from './components/BlogPostList';
 import BlogPostDetail from './components/BlogPostDetail';
@@ -65,7 +65,16 @@ const initialPosts = [
 ];
 
 function App() {
-  const [posts, setPosts] = useState(initialPosts);
+  // Load posts from localStorage or use initialPosts
+  const [posts, setPosts] = useState(() => {
+    const storedPosts = localStorage.getItem('blogPosts');
+    return storedPosts ? JSON.parse(storedPosts) : initialPosts;
+  });
+
+  // Save posts to localStorage whenever posts change
+  useEffect(() => {
+    localStorage.setItem('blogPosts', JSON.stringify(posts));
+  }, [posts]);
 
   const handleCreatePost = (newPost) => {
     setPosts([...posts, newPost]);
