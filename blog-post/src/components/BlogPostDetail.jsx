@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './BlogPostDetail.module.css';
+import CommentList from './Comment/CommentList';
+import CommentForm from './Comment/CommentForm';
+import { useComments } from './Comment/useComments';
 
 const BlogPostDetail = ({ id, title, content, author, date, onDelete }) => {
   const navigate = useNavigate();
+  const [comments, addComment] = useComments(id);
 
   // Error handling for missing data
   if (!title || !content || !author || !date) {
@@ -40,20 +44,26 @@ const BlogPostDetail = ({ id, title, content, author, date, onDelete }) => {
       <div
         className={styles.content}
         dangerouslySetInnerHTML={{ __html: content }}
-      />      <div className={styles.actions}>
+      />
+      <div className={styles.actions}>
         <Link to={`/posts/${id}/edit`} className={styles.editButton}>
           Edit Post
         </Link>
-        <button 
+        <button
           onClick={() => {
             onDelete(id);
             navigate('/');
-          }} 
+          }}
           className={styles.deleteButton}
         >
           Delete Post
         </button>
       </div>
+      <section className={styles.commentsSection} aria-label="Comments">
+        <h2>Comments</h2>
+        <CommentList comments={comments} />
+        <CommentForm onSubmit={addComment} />
+      </section>
     </article>
   );
 };

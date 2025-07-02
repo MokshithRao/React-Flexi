@@ -152,6 +152,19 @@
   transform: translateX(-4px);
 }
 
+/* Comments Section */
+.commentsSection {
+  margin-top: 2.5rem;
+  padding: 1.5rem 0 0 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+@media (max-width: 768px) {
+  .commentsSection {
+    padding: 1rem 0 0 0;
+  }
+}
+
 /* Tablet View */
 @media screen and (max-width: 1199px) {
   .blogPostDetail {
