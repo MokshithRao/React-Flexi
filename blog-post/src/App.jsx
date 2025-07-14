@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route, useParams, Link } from 'react-router-dom';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Routes, Route, useParams, Link, useSearchParams } from 'react-router-dom';
 import BlogPostList from './components/BlogPostList';
 import BlogPostDetail from './components/BlogPostDetail';
 import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
 import styles from './App.module.css';
+import SearchBar from './SearchBar';
 
 const initialPosts = [
   {
@@ -76,6 +77,21 @@ function App() {
     localStorage.setItem('blogPosts', JSON.stringify(posts));
   }, [posts]);
 
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("q");
+
+  const filteredPosts = useMemo(() => {
+    if (!query) return posts;
+
+    const lowerCaseQuery = query.toLowerCase();
+    return posts.filter((post) => {
+      const titleMatch = post.title.toLowerCase().includes(lowerCaseQuery);
+      const summaryMatch = post.summary.toLowerCase().includes(lowerCaseQuery);
+      const contentMatch = post.content.toLowerCase().includes(lowerCaseQuery);
+      return titleMatch || summaryMatch || contentMatch;
+    });
+  }, [posts, query]);
+
   const handleCreatePost = (newPost) => {
     setPosts([...posts, newPost]);
   };
@@ -96,6 +112,7 @@ function App() {
     <div className={styles.appContainer}>
       <nav className={styles.nav}>
         <Link to="/" className={styles.navLink}>Blog Posts</Link>
+        <SearchBar />
         <Link to="/create" className={styles.navLinkCreate}>Create New Post</Link>
       </nav>
 
@@ -105,7 +122,11 @@ function App() {
           element={
             <>
               <h1>Blog Posts</h1>
-              <BlogPostList posts={posts} onDelete={handleDeletePost} />
+              {filteredPosts.length > 0 ? (
+                <BlogPostList posts={filteredPosts} onDelete={handleDeletePost} />
+              ) : (
+                <p>No posts found for "{query}".</p>
+              )}
             </>
           } 
         />
@@ -132,7 +153,7 @@ function BlogPostRenderer({ posts, onDelete }) {
   const post = posts.find(p => p.id === id);
   
   if (!post) {
-    return <BlogPostDetail />;
+    return <h2>Post not found!</h2>;
   }
   
   return <BlogPostDetail {...post} onDelete={onDelete} />;

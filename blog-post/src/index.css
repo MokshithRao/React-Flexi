@@ -134,3 +134,26 @@ button:focus,
     transform: scale(1);
   }
 }
+
+/* Search Bar styles */
+#search-form {
+  display: inline-block;
+}
+
+#search-form input {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-background);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  min-width: 250px;
+}
+
+#search-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
